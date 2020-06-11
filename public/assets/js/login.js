@@ -31,4 +31,70 @@ $(function() {
             }
         }
     })
+
+    // 导入 layer
+    let layer = layui.layer
+
+    // 监听注册表单的提交事件
+    $('#form_reg').on('submit', function(e) {
+        // 阻止表单的默认提交事件
+        e.preventDefault()
+
+        // 获取用户在表单中输入的数据
+        let formData = {
+            username: $('#form_reg [name=username]').val(),
+            password: $('#form_reg [name=password]').val()
+        }
+
+        console.log(formData)
+
+        $.ajax({
+            type: 'post',
+            url: '/admin/reguser',
+            data: formData,
+            success: function(res) {
+                if (res.status == 1) {
+                    return layer.msg(res.message, { icon: 2 })
+                }
+
+                layer.msg('注册成功，请登录！', {
+                    icon: 1,
+                    time: 2000 //2秒关闭
+                }, function() {
+                    // 手动调用点击事件 跳转到登录窗口
+                    $('#link_login').click()
+                });
+            }
+        })
+    })
+
+    // 监听登录表单的提交事件
+    $('#form_login').on('submit', function(e) {
+        // 阻止默认提交行为
+        e.preventDefault()
+
+        // 获取用户在登录表单中输入的内容
+        let formData = $(this).serialize()
+
+        $.ajax({
+            type: 'post',
+            url: '/admin/login',
+            data: formData,
+            success: function(res) {
+                if (res.status !== 0) {
+                    return layer.msg(res.message, { icon: 2 })
+                }
+
+                layer.msg('登录成功！', {
+                    icon: 1
+                }, function() {
+                    // 登录成功将得到的 token 字符串 保存到 localStorage 中
+                    localStorage.setItem('token', res.token)
+
+                    // 跳转到管理员首页
+                    location.href = 'index.html'
+                });
+            }
+        })
+    })
 })

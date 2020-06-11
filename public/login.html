@@ -23,7 +23,7 @@
         <!-- 登录的div -->
         <div class="login-box">
             <!-- 登录的表单 -->
-            <form class="layui-form" action="">
+            <form class="layui-form" id="form_login">
                 <!-- 用户名 -->
                 <div class="layui-form-item">
                     <i class="layui-icon layui-icon-username"></i>
@@ -45,7 +45,7 @@
             </form>
         </div>
         <!-- 注册的div -->
-        <div class="reg-box">
+        <div class="reg-box" id="form_reg">
             <!-- 注册的表单 -->
             <form class="layui-form" action="">
                 <!-- 用户名 -->
@@ -79,6 +79,8 @@
     <script src="./assets/lib/layui/layui.all.js"></script>
     <!-- 导入jQuery -->
     <script src="./assets/lib/jquery.js"></script>
+    <!-- 导入自己封装的baseAPI.js -->
+    <script src="./assets/js/baseAPI.js"></script>
     <!-- 导入 JavaScript 脚本 -->
     <script src="./assets/js/login.js"></script>
 </body>

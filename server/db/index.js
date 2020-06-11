@@ -3,7 +3,8 @@ const mysql = require('mysql')
 
 // 创建数据库连接对象
 const db = mysql.createPool({
-    host: 'localhost:3308',
+    host: 'localhost',
+    port: 3308,
     user: 'root',
     password: '',
     database: 'breakingnews'
