@@ -32,10 +32,13 @@ app.use(function(req, res, next) {
 const expressJWT = require('express-jwt')
 const config = require('./config')
 
-app.use(expressJWT({ secret: config.jwtSecretKey }).unless({ path: [/^\/admin/] }))
+app.use(expressJWT({ secret: config.jwtSecretKey }).unless({ path: [/^\/home/] }))
 
 // 导入并注册新用户路由模块
-app.use('/admin', require('./router/user'))
+app.use('/home', require('./router/user'))
+
+// 导入并使用用户信息路由模块
+app.use('/admin', require('./router/userinfo'))
 
 // 错误处理中间件
 app.use(function(err, req, res, next) {
