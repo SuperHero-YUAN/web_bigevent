@@ -32,13 +32,24 @@ app.use(function(req, res, next) {
 const expressJWT = require('express-jwt')
 const config = require('./config')
 
-app.use(expressJWT({ secret: config.jwtSecretKey }).unless({ path: [/^\/home/] }))
+// 托管静态资源文件
+app.use('/uploads', express.static('./uploads'))
+
+app.use(expressJWT({ secret: config.jwtSecretKey }).unless({ path: [/^\/api/] }))
 
 // 导入并注册新用户路由模块
-app.use('/home', require('./router/user'))
+app.use('/api', require('./router/user'))
 
 // 导入并使用用户信息路由模块
-app.use('/admin', require('./router/userinfo'))
+app.use('/home', require('./router/userinfo'))
+
+// 导入并使用文章分类路由模块
+// 为文章分类的路由挂载统一的访问前缀 /home/article
+app.use('/home/article', require('./router/artcate'))
+
+// 导入并使用文章路由模块
+// 为文章的路由挂载统一的访问前缀 /home/article
+app.use('/home/article', require('./router/article'))
 
 // 错误处理中间件
 app.use(function(err, req, res, next) {

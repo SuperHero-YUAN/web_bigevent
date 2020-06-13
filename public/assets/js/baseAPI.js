@@ -3,7 +3,7 @@ $.ajaxPrefilter(function(options) {
     // 在发起真正的Ajax请求之前 统一凭借基础路径
     options.url = `http://localhost:3008${options.url}`
 
-    if (options.url.indexOf('/admin/') !== -1) {
+    if (options.url.indexOf('/home/') !== -1) {
         // 统一为有权限的接口设置 headers 请求头
         options.headers = {
             Authorization: localStorage.getItem('token') || ''

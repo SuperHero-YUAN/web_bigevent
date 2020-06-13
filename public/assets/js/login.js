@@ -50,7 +50,7 @@ $(function() {
 
         $.ajax({
             type: 'post',
-            url: '/home/reguser',
+            url: '/api/reguser',
             data: formData,
             success: function(res) {
                 if (res.status == 1) {
@@ -78,7 +78,7 @@ $(function() {
 
         $.ajax({
             type: 'post',
-            url: '/home/login',
+            url: '/api/login',
             data: formData,
             success: function(res) {
                 if (res.status !== 0) {
